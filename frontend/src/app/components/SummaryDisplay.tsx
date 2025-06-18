@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef, useState } from "react";
+import React, { forwardRef, useState } from "react";
 
 interface SummaryDisplayProps {
   summary: string;

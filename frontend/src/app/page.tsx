@@ -3,7 +3,6 @@ import React, { useRef, useState, useEffect } from "react";
 import LogoHeader from "./components/LogoHeader";
 import SummaryForm from "./components/SummaryForm";
 import SummaryDisplay from "./components/SummaryDisplay";
-import Head from "next/head";
 
 interface SummaryEntry {
   input: string;
