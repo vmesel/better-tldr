@@ -1,4 +1,5 @@
 import os
+from typing import Generator
 from openai import OpenAI
 
 
@@ -18,9 +19,7 @@ def summarize_text(text: str, custom_prompt: str = None) -> Generator[str, None,
     """
 
     if not custom_prompt:
-        custom_prompt = """
-        You are a helpful assistant that summarizes text.
-        """
+        custom_prompt = "You are a helpful assistant that summarizes text."
 
     completions = CLIENT.chat.completions.create(
         model="gpt-4.1",

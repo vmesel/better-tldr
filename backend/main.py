@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Body
 from fastapi.responses import StreamingResponse
 
 from agent import summarize_text
@@ -16,5 +16,5 @@ def home():
 
 
 @app.post("/summarize")
-def streaming_summarize(text: str):
+def streaming_summarize(text: str = Body(...)):
     return StreamingResponse(summarize_text(text), media_type="text/event-stream")
