@@ -5,25 +5,36 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8000:8000
-    volumes:
-      - ./backend:/app
     environment:
       - PORT=8000
     env_file:
       - .env
+    volumes:
+      # Files individually assigned a volume due to MacOS compatibility
+      # on syncing uv packages on ARM architectures
+     - ./backend/main.py:/app/main.py
+     - ./backend/agent.py:/app/agent.py
+     - ./backend/tests:/app/tests
+     - ./backend/pyproject.toml:/app/pyproject.toml
+     - ./backend/uv.lock:/app/uv.lock
   
-  # frontend:
-  #   build:
-  #     context: frontend
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - 3000:3000
-  #   volumes:
-  #     - ./frontend:/app
-  #   environment:
-  #     - PORT=3000
-  #   depends_on:
-  #     - backend
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - PORT=3000
+    depends_on:
+      - backend
+    volumes:
+      # Files individually assigned a volume due to MacOS compatibility
+      # on building tailwind on ARM architectures
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - ./frontend/package.json:/app/package.json
+      - ./frontend/package-lock.json:/app/package-lock.json
   
   # db:
   #   image: postgres:15
