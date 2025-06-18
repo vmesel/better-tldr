@@ -6,6 +6,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from agent import summarize_text
 
+import sentry_sdk
+
+if os.getenv("SENTRY_DSN"):
+    sentry_sdk.init(
+        dsn=os.getenv("SENTRY_DSN"),
+        traces_sample_rate=1.0,
+        profiles_sample_rate=1.0,
+    )
 
 app = FastAPI(
     title="BetterTLDR",

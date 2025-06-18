@@ -30,6 +30,7 @@ docker compose run backend uv run pytest
 The app consists of:
 - **Frontend (React/Next.js):** User submits text, receives streamed summary.
 - **Backend (FastAPI):** Receives text, streams summary from LLM (OpenAI GPT-4.1).
+    - Service observability present through Sentry SDK
 - **LLM Integration:** All LLM requests are made server-side for security.
 
 **Assumptions:**  
