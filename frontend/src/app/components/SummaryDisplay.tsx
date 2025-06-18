@@ -35,4 +35,5 @@ const SummaryDisplay = forwardRef<HTMLDivElement, SummaryDisplayProps>(
   }
 );
 
+SummaryDisplay.displayName = "SummaryDisplay";
 export default SummaryDisplay; 
