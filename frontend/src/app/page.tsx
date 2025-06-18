@@ -10,6 +10,8 @@ interface SummaryEntry {
   summary: string;
 }
 
+const SUMMARIZE_API = process.env.NEXT_PUBLIC_SUMMARIZE_API || "http://localhost:8000/summarize";
+
 export default function Home() {
   const [summaries, setSummaries] = useState<SummaryEntry[]>([]);
   const [loading, setLoading] = useState(false);
@@ -30,7 +32,7 @@ export default function Home() {
     let summary = "";
     setLoading(true);
 
-    const response = await fetch("http://localhost:8000/summarize", {
+    const response = await fetch(SUMMARIZE_API, {
       method: "POST",
       headers: { "Content-Type": "text/plain" },
       body: input,
@@ -70,7 +72,7 @@ export default function Home() {
           {summaries.map((entry, idx) => (
             <div key={idx} className="bg-[#181818] rounded-lg shadow border border-gray-700 p-4">
               <div className="mb-2 text-sm text-gray-400">
-                <span className="font-semibold text-orange-400">{entry.input.slice(0, 100)}{entry.input.length > 100 ? "..." : ""}</span>
+                <span className="font-semibold text-orange-400">Excerpt:</span> {entry.input.slice(0, 100)}{entry.input.length > 100 ? "..." : ""}
               </div>
               <SummaryDisplay
                 ref={idx === summaries.length - 1 ? summaryRef : undefined}
