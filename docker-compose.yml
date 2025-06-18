@@ -9,14 +9,6 @@ services:
       - PORT=8000
     env_file:
       - .env
-    volumes:
-      # Files individually assigned a volume due to MacOS compatibility
-      # on syncing uv packages on ARM architectures
-     - ./backend/main.py:/app/main.py
-     - ./backend/agent.py:/app/agent.py
-     - ./backend/tests:/app/tests
-     - ./backend/pyproject.toml:/app/pyproject.toml
-     - ./backend/uv.lock:/app/uv.lock
   
   frontend:
     build:
@@ -35,12 +27,3 @@ services:
       - ./frontend/public:/app/public
       - ./frontend/package.json:/app/package.json
       - ./frontend/package-lock.json:/app/package-lock.json
-  
-  # db:
-  #   image: postgres:15
-  #   ports:
-  #     - 5432:5432
-  #   environment:
-  #     - POSTGRES_USER=bettertldr
-  #     - POSTGRES_PASSWORD=bettertldr
-  #     - POSTGRES_DB=bettertldr
